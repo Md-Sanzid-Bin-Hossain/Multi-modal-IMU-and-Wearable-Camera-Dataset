@@ -1,63 +1,42 @@
-# Multi-modal IMU and Wearable Camera Dataset — Processing Code
+# Wearable Motion Capture Dataset for Gait Analysis  
+### IMUs and Shank-Mounted Egocentric Cameras — Processing Code
 
-This repository provides code used to support the preparation of a dataset that combines:
-- wearable inertial sensors (IMU), and
-- wearable (shank-mounted) egocentric video.
+This repository provides the **processing and preparation code** used in the paper:
 
-The dataset itself is hosted separately (see the dataset link provided in the accompanying manuscript / data record).  
-This GitHub repository is intended to document and share the **processing scripts** used for dataset preparation.
+> **A Wearable Motion Capture Dataset for Gait Analysis Using IMUs and Shank-Mounted Egocentric Cameras**  
+> Md Sanzid Bin Hossain *et al.*
 
-> **Repository structure (current):**
->
-> - `Codes/` — scripts for dataset preparation and video/feature processing  
-> - `README.md` — documentation (this file)
+The **dataset itself is hosted separately** and can be accessed via the link provided in the manuscript and data record.  
+This GitHub repository is intended to support **transparency, reproducibility, and reuse** by sharing the scripts used during dataset preparation and feature extraction.  [oai_citation:0‡Main_manuscript.pdf](sediment://file_000000008fc0722fb07eff7325175072)
 
 ---
 
-## What is inside `Codes/`
+## Overview of the Dataset
 
-The `Codes/` directory contains scripts used for dataset preparation tasks such as:
+This work introduces a **multimodal wearable motion capture dataset** designed to support both **biomechanics** and **machine learning** research on human gait.
 
-- **Video anonymization** (e.g., face detection and blurring) to protect privacy before release  
-- **Video-derived feature extraction** (e.g., optical-flow-based motion features) for downstream analysis
+The dataset includes synchronized data from:
+- **Wearable inertial measurement units (IMUs)** mounted on the lower limbs
+- **Shank-mounted egocentric cameras** capturing first-person lower-limb video
+- **Ground-truth joint kinematics** derived from optical motion capture and musculoskeletal modeling
 
-Please refer to the comments at the top of each script in `Codes/` for:
-- required inputs,
-- expected outputs,
-- and how to run the script.
+Participants performed a wide range of locomotion tasks, including:
+- Overground walking (multiple speeds, turning, obstacles)
+- Treadmill walking (four speed conditions)
+- Slope ascent and descent
+- Stair ascent and descent
 
----
-
-## Usage notes
-
-- The scripts in this repository are provided as-is to support transparency and reproducibility.
-- Users are **not** expected to uncomment hidden “alternative instructions.”  
-  Any outdated or experimental code paths should be removed or converted into explicit options (e.g., flags or configuration values).
-
----
-
-## Dependencies
-
-The exact dependencies vary by script, but commonly used packages include:
-
-- Python 3
-- OpenCV (`cv2`)
-- NumPy
-- Pandas
-- FFmpeg (command-line tool) — if re-encoding or audio removal is used
-- Additional libraries may be required for specific pipelines (e.g., face detection)
-
-Each script should specify its own requirements at the top of the file.
+The combination of IMU signals, egocentric video, and joint kinematics enables research on:
+- Joint kinematics estimation and prediction
+- Multimodal sensor fusion
+- Locomotion mode recognition
+- Gait event detection
+- Anticipatory control and intent recognition
 
 ---
 
-## How to run
+## Example Dataset Structure
 
-Because scripts may have different inputs (local files vs cloud storage, etc.), please follow the usage instructions inside each script in `Codes/`.
+The released dataset is organized **per participant**, with subfolders corresponding to locomotion modes and sensor modalities.
 
-A typical workflow is:
-
-1. Place input files where the script expects them (or edit the input paths inside the script).
-2. Run the script with Python:
-   ```bash
-   python <script_name>.py
+**Illustrative structure (simplified):**

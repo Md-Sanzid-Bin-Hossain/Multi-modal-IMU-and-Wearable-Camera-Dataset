@@ -28,9 +28,12 @@ Participants performed a wide range of locomotion tasks, including:
 
 ## Locomotion Trial Types
 
-![Different trial types in the dataset](images/Trial_types.png)
-
-*Different trial types in the dataset: (a) stair (2 repetitions), (b) slope (2 repetitions), (c) treadmill (4 speeds), (d) overground (4 speeds), (e) overground round, and (f) overground obstacles.*
+<p align="center">
+  <img src="images/Trial_types.png" width="500">
+</p>
+<p align="center">
+  <em>Different trial types in the dataset: (a) stair (2 repetitions), (b) slope (2 repetitions), (c) treadmill (4 speeds), (d) overground (4 speeds), (e) overground round, and (f) overground obstacles.</em>
+</p>
 
 
 The combination of IMU signals, egocentric video, and joint kinematics enables research on:

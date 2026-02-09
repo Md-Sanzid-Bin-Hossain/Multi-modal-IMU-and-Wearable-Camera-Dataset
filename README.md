@@ -56,4 +56,12 @@ The combination of IMU signals, egocentric video, and joint kinematics enables r
 
 The released dataset is organized **per participant**, with subfolders corresponding to locomotion modes and sensor modalities.
 
-**Illustrative structure (simplified):**
+
+<p align="center">
+  <img src="images/folder_structure.png" width="650">
+</p>
+<p align="center">
+  <em>Folder structure of the dataset (left), illustrating the organization of files for each subject. The size of each file in the directory is provided in the right figure.</em>
+</p>
+
+

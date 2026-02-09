@@ -36,6 +36,13 @@ Participants performed a wide range of locomotion tasks, including:
 </p>
 
 
+<p align="center">
+  <img src="images/marker_and_sensors.png" width="700">
+</p>
+<p align="center">
+  <em>Markers, IMUs, and camera location. Primary markers were placed on anatomical bony landmarks following a modified Helen Hayes marker set to ensure consistency across participants. Additional markers were applied on soft tissue regions to assist with the kinematics tracking, with placement adjusted as needed based on reference anatomical photographs captured during the static calibration pose. T_head, R_hip, L_hip markers are used for scaling purposes and are not used directly for kinematics tracking.</em>
+</p>
+
 The combination of IMU signals, egocentric video, and joint kinematics enables research on:
 - Joint kinematics estimation and prediction
 - Multimodal sensor fusion

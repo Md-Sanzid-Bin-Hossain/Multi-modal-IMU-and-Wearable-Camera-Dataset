@@ -7,7 +7,6 @@ This repository provides the **processing and preparation code** used in the pap
 > Md Sanzid Bin Hossain *et al.*
 
 The **dataset itself is hosted separately** and can be accessed via the link provided in the manuscript and data record.  
-This GitHub repository is intended to support **transparency, reproducibility, and reuse** by sharing the scripts used during dataset preparation and feature extraction.  [oai_citation:0‡Main_manuscript.pdf](sediment://file_000000008fc0722fb07eff7325175072)
 
 ---
 

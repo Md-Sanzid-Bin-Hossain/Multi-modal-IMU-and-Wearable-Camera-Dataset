@@ -7,6 +7,7 @@ This repository provides the **processing and preparation code** used in the pap
 > Md Sanzid Bin Hossain *et al.*
 
 The **dataset itself is hosted separately** and can be accessed via the link provided in the manuscript and data record.  
+This repository does **not** contain model training or evaluation code; it focuses exclusively on data preprocessing, anonymization, and feature extraction used during dataset preparation.
 
 ---
 
@@ -15,8 +16,8 @@ The **dataset itself is hosted separately** and can be accessed via the link pro
 This work introduces a **multimodal wearable motion capture dataset** designed to support both **biomechanics** and **machine learning** research on human gait.
 
 The dataset includes synchronized data from:
-- **Wearable inertial measurement units (IMUs)** mounted on the lower limbs
-- **Shank-mounted egocentric cameras** capturing first-person lower-limb video
+- **Wearable inertial measurement units (IMUs)** worn on the lower limbs
+- **Shank-mounted egocentric cameras** capturing first-person lower-limb video from both legs
 - **Ground-truth joint kinematics** derived from optical motion capture and musculoskeletal modeling
 
 Participants performed a wide range of locomotion tasks, including:
@@ -24,6 +25,8 @@ Participants performed a wide range of locomotion tasks, including:
 - Treadmill walking (four speed conditions)
 - Slope ascent and descent
 - Stair ascent and descent
+
+---
 
 ## Locomotion Trial Types
 
@@ -34,6 +37,9 @@ Participants performed a wide range of locomotion tasks, including:
   <em>Different trial types in the dataset: (a) stair (2 repetitions), (b) slope (2 repetitions), (c) treadmill (4 speeds), (d) overground (4 speeds), (e) overground round, and (f) overground obstacles.</em>
 </p>
 
+---
+
+## Sensor and Marker Placement
 
 <p align="center">
   <img src="images/marker_and_sensors.png" width="700">
@@ -55,12 +61,9 @@ The combination of IMU signals, egocentric video, and joint kinematics enables r
 
 The released dataset is organized **per participant**, with subfolders corresponding to locomotion modes and sensor modalities.
 
-
 <p align="center">
   <img src="images/folder_structure.png" width="650">
 </p>
 <p align="center">
   <em>Folder structure of the dataset (left), illustrating the organization of files for each subject. The size of each file in the directory is provided in the right figure.</em>
 </p>
-
-

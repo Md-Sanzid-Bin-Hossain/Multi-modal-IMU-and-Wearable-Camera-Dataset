@@ -26,6 +26,13 @@ Participants performed a wide range of locomotion tasks, including:
 - Slope ascent and descent
 - Stair ascent and descent
 
+## Locomotion Trial Types
+
+![Different trial types in the dataset](images/Trial_types.png)
+
+*Different trial types in the dataset: (a) stair (2 repetitions), (b) slope (2 repetitions), (c) treadmill (4 speeds), (d) overground (4 speeds), (e) overground round, and (f) overground obstacles.*
+
+
 The combination of IMU signals, egocentric video, and joint kinematics enables research on:
 - Joint kinematics estimation and prediction
 - Multimodal sensor fusion

@@ -12,6 +12,10 @@ The **dataset itself is hosted separately** on Figshare and can be accessed via 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_LINK_HERE)
 [![Dataset](https://img.shields.io/badge/Dataset-Figshare-blue)](YOUR_FIGSHARE_LINK_HERE)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+![Participants](https://img.shields.io/badge/Participants-10-green)
+![Conditions](https://img.shields.io/badge/Conditions-14-green)
+![Modalities](https://img.shields.io/badge/Modalities-4-green)
+![Size](https://img.shields.io/badge/Dataset-1.58GB-orange)
 
 ---
 
@@ -67,10 +71,24 @@ across 6 locomotion modes.
 
 ---
 
+## Dataset Access
+
+| File | Size | Description |
+|---|---|---|
+| Raw dataset | ~XX GB | TRC, CSV, IMU, HOF files per participant |
+| `WMCG_dataset.h5` | 1.58 GB | Unified HDF5 — recommended for analysis |
+
+**DOI:** [`YOUR_DOI_HERE`](YOUR_FIGSHARE_LINK_HERE)
+
+> The HDF5 file consolidates all modalities into a single file
+> optimized for programmatic access via the analysis notebook.
+
+---
+
 ## Dataset Structure
 
 The released dataset is organized per participant with subfolders for each
-locomotion mode and sensor modality. A unified HDF5 file (`gait_dataset.h5`)
+locomotion mode and sensor modality. A unified HDF5 file (`WMCG_dataset.h5`)
 is provided for efficient programmatic access.
 
 <p align="center">
@@ -82,7 +100,7 @@ is provided for efficient programmatic access.
 
 ### HDF5 Structure
 ```
-gait_dataset.h5
+WMCG_dataset.h5
 ├── metadata/
 │   ├── demographics/          # age, weight, height, leg length, gender
 │   ├── treadmill_speeds_ms/   # Froude-based speeds per subject (m/s)
@@ -114,7 +132,7 @@ import numpy as np
 import pandas as pd
 from io import StringIO
 
-with h5py.File("gait_dataset.h5", "r") as hf:
+with h5py.File("WMCG_dataset.h5", "r") as hf:
 
     # Demographics
     ages = hf["metadata/demographics/age"][:]
@@ -165,6 +183,7 @@ All analyses are performed directly from the HDF5 file — no raw files needed.
 | 12 | Speed-ROM correlation |
 | 13 | Inter-subject variability (CV + PCA) |
 | 14 | **Example application: Locomotion classification** |
+| 15 | **Paper-quality figure generation** |
 
 ---
 
@@ -180,17 +199,17 @@ sensor features extracted directly from the dataset.
   Slope Ascent/Descent, Stair Ascent/Descent
 - **Classifier:** Random Forest (200 trees, balanced class weights)
 - **Validation:** Leave-One-Subject-Out CV (LOSO-CV)
-- **Granularity:** Per gait cycle — each stride is one sample
+- **Granularity:** Per gait cycle (~14,000 total cycles)
 - **Chance level:** 12.5% (1/8 classes)
 
 ### Feature Sets
 
 | Experiment | Features | Dim |
 |---|---|---|
-| ROM Baseline | Hip, Knee, Ankle ROM (R+L) | 6 |
-| IMU Only | Statistical features from 8 sensors × 6 ch | 288 |
-| HOF Only | Statistical features from L+R shoe cameras | 108 |
-| IMU + HOF | Combined multimodal | 396 |
+| ROM Baseline | Hip, Knee, Ankle ROM (R+L) per cycle | 6 |
+| IMU Only | Statistical features from 8 sensors × 6 ch × 6 stats | 288 |
+| HOF Only | Statistical features from L+R shoe cameras × 18 bins × 3 stats | 108 |
+| IMU + HOF | Combined multimodal fusion | 396 |
 
 ### Results
 
@@ -202,18 +221,16 @@ sensor features extracted directly from the dataset.
 | **IMU + HOF (Multimodal)** | **88.7%** | **+76.2%** |
 
 Key findings:
-- Multimodal fusion of IMU and HOF outperforms either modality alone
+- Multimodal IMU+HOF fusion outperforms either modality alone
 - Treadmill walking classified with **100% accuracy** by wearable sensors
-- Overground path-variant conditions (circular, obstacles) are most challenging
-  due to kinematic similarity with standard overground walking
-- Even the simple ROM baseline achieves **4× above chance**,
-  confirming the discriminative quality of the kinematic data
+- Overground path-variant conditions (circular, obstacles) are most
+  challenging due to kinematic similarity with standard overground walking
+- ROM baseline achieves **4× above chance**, confirming discriminative
+  quality of the kinematic data
 
 ---
 
 ## Statistical Validation
-
-The dataset includes comprehensive statistical analyses:
 
 ### Walking Speed
 - Treadmill speeds prescribed via Froude-number scaling
@@ -223,28 +240,45 @@ The dataset includes comprehensive statistical analyses:
   displacement (turn cycles excluded)
 
 ### Joint ROM
-- **Test-retest reliability:** ICC(2,1) computed for slope
-  and stair conditions (Rep1 vs Rep2) — predominantly
-  Excellent (ICC ≥ 0.90)
-- **Speed effect:** Friedman test with Wilcoxon/Bonferroni
-  post-hoc — significant speed-dependent ROM increase for
-  all joints on treadmill (p < 0.001, W = 0.51–1.00);
-  overground knee ROM not significantly affected (p > 0.12)
-- **Bilateral symmetry:** Symmetry Index < 10% across
-  most conditions, confirming bilateral consistency
-- **Condition comparison:** Kruskal-Wallis + Mann-Whitney
-  post-hoc across 8 locomotion modes
+- **Test-retest reliability:** ICC(2,1) for slope and stair
+  conditions (Rep1 vs Rep2) — predominantly Excellent (ICC ≥ 0.90)
+- **Speed effect:** Friedman test + Wilcoxon/Bonferroni post-hoc —
+  significant speed-dependent ROM increase for all treadmill joints
+  (p < 0.001, W = 0.51–1.00); overground knee ROM not significantly
+  affected (p > 0.12)
+- **Bilateral symmetry:** Symmetry Index < 10% across most conditions
+- **Condition comparison:** Kruskal-Wallis + Mann-Whitney post-hoc
+  across 8 locomotion modes
 
 ---
 
 ## Repository Contents
 ```
-├── analysis_notebook.ipynb    # Full Google Colab analysis notebook
-├── images/
+├── Codes/                     # Processing and feature extraction scripts
+├── images/                    # Figures for README
 │   ├── Trial_types.png
 │   ├── marker_and_sensors.png
 │   └── folder_structure.png
+├── requirements.txt           # Python dependencies
+├── CITATION.cff               # Citation metadata
 └── README.md
+```
+
+---
+
+## Requirements
+```bash
+pip install -r requirements.txt
+```
+```
+h5py>=3.9.0
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scipy>=1.10.0
+scikit-learn>=1.3.0
+pingouin>=0.5.3
 ```
 
 ---
@@ -253,14 +287,20 @@ The dataset includes comprehensive statistical analyses:
 
 If you use this dataset or code in your research, please cite:
 ```bibtex
-@article{hossain2024wearable,
-  title   = {A Wearable Motion Capture Dataset for Gait Analysis
-             Using IMUs and Shank-Mounted Egocentric Cameras},
-  author  = {Hossain, Md Sanzid Bin and others},
-  journal = {Scientific Data},
-  year    = {2024},
+@misc{hossain2024wearable,
+  title     = {A Wearable Motion Capture Dataset for Gait Analysis
+               Using IMUs and Shank-Mounted Egocentric Cameras},
+  author    = {Hossain, Md Sanzid Bin and others},
+  year      = {2024},
+  note      = {Manuscript under review},
+  url       = {YOUR_FIGSHARE_LINK_HERE},
 }
 ```
+
+> **Note:** This dataset is currently under review.
+> Citation details will be updated upon publication.
+> In the meantime, please cite the dataset DOI directly:
+> `YOUR_FIGSHARE_DOI_HERE`
 
 ---
 

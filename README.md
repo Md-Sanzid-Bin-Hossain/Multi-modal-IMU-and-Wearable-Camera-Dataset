@@ -9,8 +9,8 @@ This repository provides the **processing, analysis, and example application cod
 
 The **dataset itself is hosted separately** on Figshare and can be accessed via the link provided in the manuscript and data record.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_LINK_HERE)
-[![Dataset](https://img.shields.io/badge/Dataset-Figshare-blue)](YOUR_FIGSHARE_LINK_HERE)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Md-Sanzid-Bin-Hossain/Multi-modal-IMU-and-Wearable-Camera-Dataset/blob/main/Wearable_Motion_capture_Validation.ipynb)
+[![Dataset](https://img.shields.io/badge/Dataset-Figshare-blue)](https://plus.figshare.com/articles/dataset/_b_i_A_Wearable_Motion_Capture_Dataset_for_Gait_Analysis_Using_IMUs_and_Shank-Mounted_Egocentric_Cameras_i_b_/29328746)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 ![Participants](https://img.shields.io/badge/Participants-10-green)
 ![Conditions](https://img.shields.io/badge/Conditions-14-green)
@@ -33,7 +33,7 @@ The dataset includes synchronized data from:
 | **Optical motion capture** | Vicon, 12 cameras, 100 Hz, 34 reflective markers |
 | **Joint kinematics** | OpenSim musculoskeletal modeling, degrees |
 
-**10 participants** (6 Male, 4 Female, age 23.9 ± 3.1 years) performed **14 locomotion conditions**
+**10 participants** (6 Male, 4 Female, age 23.9 ± 2.91 years) performed **14 locomotion conditions**
 across 6 locomotion modes.
 
 ---
@@ -75,10 +75,10 @@ across 6 locomotion modes.
 
 | File | Size | Description |
 |---|---|---|
-| Raw dataset | ~XX GB | TRC, CSV, IMU, HOF files per participant |
+| Raw dataset (zipped) | 142.71 GB total (10 per-participant zips, ~13–15 GB each) | TRC, CSV, IMU, HOF, video files per participant |
 | `WMCG_dataset.h5` | 1.58 GB | Unified HDF5 — recommended for analysis |
 
-**DOI:** [`YOUR_DOI_HERE`](YOUR_FIGSHARE_LINK_HERE)
+**DOI:** [`10.25452/figshare.plus.29328746.v2`](https://doi.org/10.25452/figshare.plus.29328746.v2)
 
 > The HDF5 file consolidates all modalities into a single file
 > optimized for programmatic access via the analysis notebook.
@@ -162,8 +162,12 @@ with h5py.File("WMCG_dataset.h5", "r") as hf:
 
 A complete reproducible analysis notebook is provided as a Google Colab notebook.
 All analyses are performed directly from the HDF5 file — no raw files needed.
+Formal technical validation results (gait cycle visualization, ROM statistics,
+speed-effect tests, locomotion classification) are reported in the manuscript;
+the notebook provides the executable code that reproduces them and extends
+them with additional exploratory analyses.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_LINK_HERE)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Md-Sanzid-Bin-Hossain/Multi-modal-IMU-and-Wearable-Camera-Dataset/blob/main/Wearable_Motion_capture_Validation.ipynb)
 
 ### Notebook Contents
 
@@ -230,37 +234,18 @@ Key findings:
 
 ---
 
-## Statistical Validation
-
-### Walking Speed
-- Treadmill speeds prescribed via Froude-number scaling
-  (v = Fr × √(g × L_leg)), ensuring dynamically equivalent
-  walking across participants
-- Overground speeds computed cycle-by-cycle from pelvis
-  displacement (turn cycles excluded)
-
-### Joint ROM
-- **Test-retest reliability:** ICC(2,1) for slope and stair
-  conditions (Rep1 vs Rep2) — predominantly Excellent (ICC ≥ 0.90)
-- **Speed effect:** Friedman test + Wilcoxon/Bonferroni post-hoc —
-  significant speed-dependent ROM increase for all treadmill joints
-  (p < 0.001, W = 0.51–1.00); overground knee ROM not significantly
-  affected (p > 0.12)
-- **Bilateral symmetry:** Symmetry Index < 10% across most conditions
-- **Condition comparison:** Kruskal-Wallis + Mann-Whitney post-hoc
-  across 8 locomotion modes
-
----
-
 ## Repository Contents
 ```
-├── Codes/                     # Processing and feature extraction scripts
-├── images/                    # Figures for README
+├── Codes/
+│   ├── HOF_extraction.py              # Dense optical flow + 18-bin HOF features
+│   └── face_blurr.py                  # InsightFace-based face detection + blurring
+├── images/                            # Figures used in README
 │   ├── Trial_types.png
 │   ├── marker_and_sensors.png
 │   └── folder_structure.png
-├── requirements.txt           # Python dependencies
-├── CITATION.cff               # Citation metadata
+├── Wearable_Motion_capture_Validation.ipynb   # Reproducible analysis notebook (Colab-ready)
+├── requirements.txt                   # Python dependencies
+├── LICENSE                            # CC BY 4.0
 └── README.md
 ```
 
@@ -287,20 +272,18 @@ pingouin>=0.5.3
 
 If you use this dataset or code in your research, please cite:
 ```bibtex
-@misc{hossain2024wearable,
+@misc{hossain2026wearable,
   title     = {A Wearable Motion Capture Dataset for Gait Analysis
                Using IMUs and Shank-Mounted Egocentric Cameras},
   author    = {Hossain, Md Sanzid Bin and others},
-  year      = {2024},
-  note      = {Manuscript under review},
-  url       = {YOUR_FIGSHARE_LINK_HERE},
+  year      = {2026},
+  url       = {https://doi.org/10.25452/figshare.plus.29328746.v2},
 }
 ```
 
-> **Note:** This dataset is currently under review.
-> Citation details will be updated upon publication.
-> In the meantime, please cite the dataset DOI directly:
-> `YOUR_FIGSHARE_DOI_HERE`
+> **Note:** Citation details will be updated upon publication of the
+> accompanying manuscript. In the meantime, please cite the dataset
+> DOI directly: `10.25452/figshare.plus.29328746.v2`
 
 ---
 

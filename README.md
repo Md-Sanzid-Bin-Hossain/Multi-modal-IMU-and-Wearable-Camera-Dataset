@@ -61,7 +61,7 @@ across 6 locomotion modes.
 ## Sensor & Marker Placement
 
 <p align="center">
-  <img src="images/marker_and_sensors.png" width="700">
+  <img src="images/marker_and_sensors_new.png" width="700">
 </p>
 <p align="center">
   <em>Sensor and marker placement. IMUs placed on sternum, sacrum, bilateral
@@ -92,7 +92,7 @@ locomotion mode and sensor modality. A unified HDF5 file (`WMCG_dataset.h5`)
 is provided for efficient programmatic access.
 
 <p align="center">
-  <img src="images/folder_structure.png" width="650">
+  <img src="images/folder_structure_new.png" width="650">
 </p>
 <p align="center">
   <em>Original folder structure (left) and file sizes (right).</em>
